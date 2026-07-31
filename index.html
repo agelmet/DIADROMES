@@ -8,8 +8,16 @@
 <meta name="description" content="Οι Διαδρομές είναι ένας χώρος υποστήριξης & ψυχοθεραπείας. Ψυχοθεραπεία, συμβουλευτική γονέων και play therapy, με σεβασμό στην προσωπική διαδρομή του κάθε ατόμου.">
 <meta property="og:title" content="Διαδρομές — Χώρος Υποστήριξης & Ψυχοθεραπείας">
 <meta property="og:description" content="Ψυχοθεραπεία | Συμβουλευτική Γονέων | Play Therapy">
-<meta property="og:image" content="https://raw.githubusercontent.com/agelmet/DIADROMES/main/logo%20(1).png">
+<meta property="og:image" content="https://raw.githubusercontent.com/agelmet/DIADROMES/main/assets/diadromes-team-three-therapists-thessaloniki.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Οι τρεις θεραπεύτριες των Διαδρομών στον χώρο του play therapy">
 <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Διαδρομές — Χώρος Υποστήριξης &amp; Ψυχοθεραπείας">
+<meta name="twitter:description" content="Ψυχοθεραπεία | Συμβουλευτική Γονέων | Play Therapy">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/agelmet/DIADROMES/main/assets/diadromes-team-three-therapists-thessaloniki.jpg">
+<meta name="twitter:image:alt" content="Οι τρεις θεραπεύτριες των Διαδρομών στον χώρο του play therapy">
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/agelmet/DIADROMES/main/logo%20(1).png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +48,11 @@
   --font-b:'Commissioner',system-ui,sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
+/* <picture> wrappers must fill their frame so the inner img sizing rules still apply */
+.about-frame picture,.svc-img picture,.tcard-photo picture,.sp picture{display:block;width:100%;height:100%}
+/* the width/height attrs (there to reserve space and stop CLS) are presentational hints —
+   without this the attr height would beat the aspect-ratio rules below */
+.about-frame img,.svc-img img,.tcard-photo img{height:auto}
 html{scroll-behavior:smooth}
 body{
   font-family:var(--font-b);
@@ -505,7 +518,7 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
     </div>
     <div class="hero-visual">
       <div class="hero-logo-ring">
-        <img class="hero-logo zoomable" src="https://raw.githubusercontent.com/agelmet/DIADROMES/main/logo%20(1).png" alt="Διαδρομές — λογότυπο">
+        <img class="hero-logo zoomable" src="https://raw.githubusercontent.com/agelmet/DIADROMES/main/logo%20(1).png" alt="Διαδρομές — λογότυπο" width="500" height="500" fetchpriority="high" decoding="async">
         <div class="orbit-dot"></div>
       </div>
     </div>
@@ -547,9 +560,16 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
           <defs><path id="circlePath" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
           <text><textPath href="#circlePath"><tspan data-l="el">διαδρομές · ασφαλής χώρος · </tspan><tspan data-l="en">diadromes · safe space · here </tspan></textPath></text>
         </svg>
-        <!-- REPLACE: σβήσε το data-ph και βάλε το πραγματικό URL της φωτογραφίας του χώρου στο src -->
         <div class="about-frame">
-          <img class="zoomable" data-ph="space" data-hue="a" src="" alt="Ο χώρος των Διαδρομών">
+          <picture>
+            <source type="image/webp" sizes="(max-width:1024px) calc(100vw - 56px), 557px"
+              srcset="assets/diadromes-doorway-therapy-space-thessaloniki-600.webp 600w, assets/diadromes-doorway-therapy-space-thessaloniki-1000.webp 1000w, assets/diadromes-doorway-therapy-space-thessaloniki.webp 1560w">
+            <img class="zoomable" src="assets/diadromes-doorway-therapy-space-thessaloniki.jpg"
+              sizes="(max-width:1024px) calc(100vw - 56px), 557px"
+              srcset="assets/diadromes-doorway-therapy-space-thessaloniki-600.jpg 600w, assets/diadromes-doorway-therapy-space-thessaloniki-1000.jpg 1000w, assets/diadromes-doorway-therapy-space-thessaloniki.jpg 1560w"
+              width="1560" height="1950" loading="lazy" decoding="async"
+              alt="Ασπρόμαυρη φωτογραφία: ανοιχτή πόρτα προς ένα φωτεινό δωμάτιο στον χώρο των Διαδρομών, με μια γυναίκα να περνά το κατώφλι">
+          </picture>
         </div>
         <div class="about-badge">
           <b>3</b>
@@ -591,7 +611,15 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
       </div>
       <div class="svc-visual">
         <!-- REPLACE: πραγματική φωτογραφία -->
-        <div class="svc-img"><img class="zoomable" data-ph="service" data-hue="a" src="" alt="Ψυχοθεραπεία στις Διαδρομές"></div>
+        <div class="svc-img"><picture>
+          <source type="image/webp" sizes="(max-width:1024px) calc(100vw - 56px), 557px"
+            srcset="assets/psychotherapy-room-armchair-diadromes-thessaloniki-600.webp 600w, assets/psychotherapy-room-armchair-diadromes-thessaloniki-1000.webp 1000w, assets/psychotherapy-room-armchair-diadromes-thessaloniki.webp 1560w">
+          <img class="zoomable" src="assets/psychotherapy-room-armchair-diadromes-thessaloniki.jpg"
+            sizes="(max-width:1024px) calc(100vw - 56px), 557px"
+            srcset="assets/psychotherapy-room-armchair-diadromes-thessaloniki-600.jpg 600w, assets/psychotherapy-room-armchair-diadromes-thessaloniki-1000.jpg 1000w, assets/psychotherapy-room-armchair-diadromes-thessaloniki.jpg 1560w"
+            width="1560" height="1248" loading="lazy" decoding="async"
+            alt="Γωνιά ψυχοθεραπείας στις Διαδρομές: σκούρα μπλε πολυθρόνα με κεραμιδί μαξιλάρι, τρία γεωμετρικά κάδρα σε χρυσές κορνίζες και φυτό μονστέρα">
+        </picture></div>
         <div class="svc-chip"><span data-l="el">Ενήλικες · Ατομικά &amp; Ομαδικά</span><span data-l="en">Adults · Individual &amp; Group</span></div>
         <svg class="svc-doodle" viewBox="0 0 120 90"><path d="M8 74 C 30 40, 46 86, 66 52 S 100 18, 112 30"/></svg>
       </div>
@@ -633,7 +661,15 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
       </div>
       <div class="svc-visual">
         <!-- REPLACE: πραγματική φωτογραφία -->
-        <div class="svc-img"><img class="zoomable" data-ph="service" data-hue="b" src="" alt="Συμβουλευτική γονέων στις Διαδρομές"></div>
+        <div class="svc-img"><picture>
+          <source type="image/webp" sizes="(max-width:1024px) calc(100vw - 56px), 557px"
+            srcset="assets/parent-counselling-session-diadromes-thessaloniki-600.webp 600w, assets/parent-counselling-session-diadromes-thessaloniki-1000.webp 1000w, assets/parent-counselling-session-diadromes-thessaloniki.webp 1560w">
+          <img class="zoomable" src="assets/parent-counselling-session-diadromes-thessaloniki.jpg"
+            sizes="(max-width:1024px) calc(100vw - 56px), 557px"
+            srcset="assets/parent-counselling-session-diadromes-thessaloniki-600.jpg 600w, assets/parent-counselling-session-diadromes-thessaloniki-1000.jpg 1000w, assets/parent-counselling-session-diadromes-thessaloniki.jpg 1560w"
+            width="1560" height="1248" loading="lazy" decoding="async"
+            alt="Δύο γυναίκες συνομιλούν καθισμένες σε γκρι πολυθρόνες μπροστά σε κίτρινο τοίχο, σε συνάντηση συμβουλευτικής γονέων">
+        </picture></div>
         <div class="svc-chip"><span data-l="el">Γονείς &amp; Φροντιστές</span><span data-l="en">Parents &amp; Caregivers</span></div>
         <svg class="svc-doodle" viewBox="0 0 120 90"><path d="M10 30 C 34 66, 52 22, 72 56 S 104 76, 112 60"/></svg>
       </div>
@@ -681,7 +717,15 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
       </div>
       <div class="svc-visual">
         <!-- REPLACE: πραγματική φωτογραφία -->
-        <div class="svc-img"><img class="zoomable" data-ph="service" data-hue="c" src="" alt="Play therapy στις Διαδρομές"></div>
+        <div class="svc-img"><picture>
+          <source type="image/webp" sizes="(max-width:1024px) calc(100vw - 56px), 557px"
+            srcset="assets/play-therapy-sand-tray-diadromes-thessaloniki-600.webp 600w, assets/play-therapy-sand-tray-diadromes-thessaloniki-1000.webp 1000w, assets/play-therapy-sand-tray-diadromes-thessaloniki.webp 1560w">
+          <img class="zoomable" src="assets/play-therapy-sand-tray-diadromes-thessaloniki.jpg"
+            sizes="(max-width:1024px) calc(100vw - 56px), 557px"
+            srcset="assets/play-therapy-sand-tray-diadromes-thessaloniki-600.jpg 600w, assets/play-therapy-sand-tray-diadromes-thessaloniki-1000.jpg 1000w, assets/play-therapy-sand-tray-diadromes-thessaloniki.jpg 1560w"
+            width="1560" height="1248" loading="lazy" decoding="async"
+            alt="Δίσκος άμμου για θεραπευτικό παιχνίδι, με φοίνικες, ξύλα, κοχύλια και μικρές φιγούρες">
+        </picture></div>
         <div class="svc-chip"><span data-l="el">Παιδιά 4–12 ετών</span><span data-l="en">Children 4–12</span></div>
         <svg class="svc-doodle" viewBox="0 0 120 90"><path d="M8 60 C 26 26, 48 74, 66 40 S 96 12, 112 44"/></svg>
       </div>
@@ -761,8 +805,14 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
       <!-- Ζωή -->
       <div class="tcard rv" data-d="1">
         <div class="tcard-photo">
-          <!-- REPLACE: πραγματικό πορτρέτο -->
-          <img class="zoomable" data-ph="portrait" data-init="Ζ" data-hue="a" src="" alt="Ζωή Τριανταφυλλίδου">
+          <picture>
+            <source type="image/webp" sizes="(max-width:1024px) min(520px, 92vw), 372px"
+              srcset="assets/zoi-triantafyllidou-psychotherapist-diadromes-thessaloniki-400.webp 400w, assets/zoi-triantafyllidou-psychotherapist-diadromes-thessaloniki-700.webp 700w, assets/zoi-triantafyllidou-psychotherapist-diadromes-thessaloniki.webp 1040w">
+            <img class="zoomable" src="assets/zoi-triantafyllidou-psychotherapist-diadromes-thessaloniki.jpg"
+              sizes="(max-width:1024px) min(520px, 92vw), 372px"
+              srcset="assets/zoi-triantafyllidou-psychotherapist-diadromes-thessaloniki-400.jpg 400w, assets/zoi-triantafyllidou-psychotherapist-diadromes-thessaloniki-700.jpg 700w, assets/zoi-triantafyllidou-psychotherapist-diadromes-thessaloniki.jpg 1040w"
+              width="1040" height="1196" loading="lazy" decoding="async"
+              alt="Η Ζωή Τριανταφυλλίδου, ψυχοθεραπεύτρια στις Διαδρομές, καθιστή με σταυρωμένα χέρια μπροστά σε κίτρινο φόντο"></picture>
           <div class="tcard-role"><span data-l="el">Ψυχοθεραπεία</span><span data-l="en">Psychotherapy</span></div>
         </div>
         <div class="tcard-body">
@@ -785,8 +835,14 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
       <!-- Εύα -->
       <div class="tcard rv" data-d="2">
         <div class="tcard-photo">
-          <!-- REPLACE: πραγματικό πορτρέτο -->
-          <img class="zoomable" data-ph="portrait" data-init="Ε" data-hue="b" src="" alt="Εύα Γκόλφου">
+          <picture>
+            <source type="image/webp" sizes="(max-width:1024px) min(520px, 92vw), 372px"
+              srcset="assets/eva-golfou-parent-counsellor-diadromes-thessaloniki-400.webp 400w, assets/eva-golfou-parent-counsellor-diadromes-thessaloniki-700.webp 700w, assets/eva-golfou-parent-counsellor-diadromes-thessaloniki.webp 1023w">
+            <img class="zoomable" src="assets/eva-golfou-parent-counsellor-diadromes-thessaloniki.jpg"
+              sizes="(max-width:1024px) min(520px, 92vw), 372px"
+              srcset="assets/eva-golfou-parent-counsellor-diadromes-thessaloniki-400.jpg 400w, assets/eva-golfou-parent-counsellor-diadromes-thessaloniki-700.jpg 700w, assets/eva-golfou-parent-counsellor-diadromes-thessaloniki.jpg 1023w"
+              width="1023" height="1176" loading="lazy" decoding="async"
+              alt="Η Εύα Γκόλφου, σύμβουλος γονέων στις Διαδρομές, χαμογελά διακριτικά μπροστά σε κίτρινο φόντο"></picture>
           <div class="tcard-role"><span data-l="el">Συμβουλευτική Γονέων</span><span data-l="en">Parent Counselling</span></div>
         </div>
         <div class="tcard-body">
@@ -810,8 +866,14 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
       <!-- Μαριλένα -->
       <div class="tcard rv" data-d="3">
         <div class="tcard-photo">
-          <!-- REPLACE: πραγματικό πορτρέτο -->
-          <img class="zoomable" data-ph="portrait" data-init="Μ" data-hue="c" src="" alt="Μαριλένα Χαλαμανίδου">
+          <picture>
+            <source type="image/webp" sizes="(max-width:1024px) min(520px, 92vw), 372px"
+              srcset="assets/marilena-chalamanidou-play-therapist-diadromes-thessaloniki-400.webp 400w, assets/marilena-chalamanidou-play-therapist-diadromes-thessaloniki-700.webp 700w, assets/marilena-chalamanidou-play-therapist-diadromes-thessaloniki.webp 1040w">
+            <img class="zoomable" src="assets/marilena-chalamanidou-play-therapist-diadromes-thessaloniki.jpg"
+              sizes="(max-width:1024px) min(520px, 92vw), 372px"
+              srcset="assets/marilena-chalamanidou-play-therapist-diadromes-thessaloniki-400.jpg 400w, assets/marilena-chalamanidou-play-therapist-diadromes-thessaloniki-700.jpg 700w, assets/marilena-chalamanidou-play-therapist-diadromes-thessaloniki.jpg 1040w"
+              width="1040" height="1196" loading="lazy" decoding="async"
+              alt="Η Μαριλένα Χαλαμανίδου, ειδικός θεραπευτικού παιχνιδιού στις Διαδρομές, χαμογελά μπροστά σε κίτρινο φόντο"></picture>
           <div class="tcard-role">Play Therapy</div>
         </div>
         <div class="tcard-body">
@@ -847,12 +909,51 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
       </p>
     </div>
     <div class="space-grid">
-      <!-- REPLACE: πραγματικές φωτογραφίες του χώρου -->
-      <div class="sp sp-1 rv-scale" data-d="1"><img class="zoomable" data-ph="space" data-hue="a" src="" alt="Ο χώρος των Διαδρομών"><div class="sp-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div></div>
-      <div class="sp sp-2 rv-scale" data-d="2"><img class="zoomable" data-ph="space" data-hue="b" src="" alt="Το γραφείο συνεδριών"><div class="sp-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div></div>
-      <div class="sp sp-3 rv-scale" data-d="1"><img class="zoomable" data-ph="space" data-hue="c" src="" alt="Το playroom"><div class="sp-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div></div>
-      <div class="sp sp-4 rv-scale" data-d="2"><img class="zoomable" data-ph="space" data-hue="a" src="" alt="Ο χώρος αναμονής"><div class="sp-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div></div>
-      <div class="sp sp-5 rv-scale" data-d="3"><img class="zoomable" data-ph="space" data-hue="b" src="" alt="Λεπτομέρειες του χώρου"><div class="sp-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div></div>
+      <div class="sp sp-1 rv-scale" data-d="1"><picture>
+        <source type="image/webp" sizes="(max-width:820px) calc(100vw - 56px), (max-width:1024px) calc((100vw - 76px)/2), 682px"
+          srcset="assets/group-therapy-room-chairs-diadromes-thessaloniki-700.webp 700w, assets/group-therapy-room-chairs-diadromes-thessaloniki-1100.webp 1100w, assets/group-therapy-room-chairs-diadromes-thessaloniki.webp 1500w">
+        <img class="zoomable" src="assets/group-therapy-room-chairs-diadromes-thessaloniki.jpg"
+          sizes="(max-width:820px) calc(100vw - 56px), (max-width:1024px) calc((100vw - 76px)/2), 682px"
+          srcset="assets/group-therapy-room-chairs-diadromes-thessaloniki-700.jpg 700w, assets/group-therapy-room-chairs-diadromes-thessaloniki-1100.jpg 1100w, assets/group-therapy-room-chairs-diadromes-thessaloniki.jpg 1500w"
+          width="1500" height="938" loading="lazy" decoding="async"
+          alt="Κύκλος από καρέκλες πάνω σε κιλίμι στον χώρο ομαδικών συναντήσεων των Διαδρομών, με φοίνικα και φωτεινή κουρτίνα">
+      </picture><div class="sp-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div></div>
+      <div class="sp sp-2 rv-scale" data-d="2"><picture>
+        <source type="image/webp" sizes="(max-width:820px) calc(100vw - 56px), (max-width:1024px) calc((100vw - 76px)/2), 482px"
+          srcset="assets/counselling-room-desk-armchair-diadromes-thessaloniki-600.webp 600w, assets/counselling-room-desk-armchair-diadromes-thessaloniki-1000.webp 1000w, assets/counselling-room-desk-armchair-diadromes-thessaloniki.webp 1400w">
+        <img class="zoomable" src="assets/counselling-room-desk-armchair-diadromes-thessaloniki.jpg"
+          sizes="(max-width:820px) calc(100vw - 56px), (max-width:1024px) calc((100vw - 76px)/2), 482px"
+          srcset="assets/counselling-room-desk-armchair-diadromes-thessaloniki-600.jpg 600w, assets/counselling-room-desk-armchair-diadromes-thessaloniki-1000.jpg 1000w, assets/counselling-room-desk-armchair-diadromes-thessaloniki.jpg 1400w"
+          width="1400" height="1225" loading="lazy" decoding="async"
+          alt="Γραφείο από ξύλο πεύκου με φωτιστικό και γκρι πολυθρόνα μπροστά σε κίτρινο τοίχο, στον χώρο συμβουλευτικής των Διαδρομών">
+      </picture><div class="sp-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div></div>
+      <div class="sp sp-3 rv-scale" data-d="1"><picture>
+        <source type="image/webp" sizes="(max-width:820px) calc(100vw - 56px), (max-width:1024px) calc((100vw - 76px)/2), 381px"
+          srcset="assets/playroom-dollhouse-diadromes-thessaloniki-500.webp 500w, assets/playroom-dollhouse-diadromes-thessaloniki-850.webp 850w, assets/playroom-dollhouse-diadromes-thessaloniki.webp 1200w">
+        <img class="zoomable" src="assets/playroom-dollhouse-diadromes-thessaloniki.jpg"
+          sizes="(max-width:820px) calc(100vw - 56px), (max-width:1024px) calc((100vw - 76px)/2), 381px"
+          srcset="assets/playroom-dollhouse-diadromes-thessaloniki-500.jpg 500w, assets/playroom-dollhouse-diadromes-thessaloniki-850.jpg 850w, assets/playroom-dollhouse-diadromes-thessaloniki.jpg 1200w"
+          width="1200" height="1020" loading="lazy" decoding="async"
+          alt="Ξύλινο κουκλόσπιτο με επιπλωμένα δωμάτια στο playroom των Διαδρομών, με κουζινάκι και τρόλεϊ αποθήκευσης παιχνιδιών στο βάθος">
+      </picture><div class="sp-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div></div>
+      <div class="sp sp-4 rv-scale" data-d="2"><picture>
+        <source type="image/webp" sizes="(max-width:820px) calc(100vw - 56px), (max-width:1024px) calc((100vw - 76px)/2), 381px"
+          srcset="assets/record-player-art-books-diadromes-thessaloniki-500.webp 500w, assets/record-player-art-books-diadromes-thessaloniki-850.webp 850w, assets/record-player-art-books-diadromes-thessaloniki.webp 1200w">
+        <img class="zoomable" src="assets/record-player-art-books-diadromes-thessaloniki.jpg"
+          sizes="(max-width:820px) calc(100vw - 56px), (max-width:1024px) calc((100vw - 76px)/2), 381px"
+          srcset="assets/record-player-art-books-diadromes-thessaloniki-500.jpg 500w, assets/record-player-art-books-diadromes-thessaloniki-850.jpg 850w, assets/record-player-art-books-diadromes-thessaloniki.jpg 1200w"
+          width="1200" height="1020" loading="lazy" decoding="async"
+          alt="Πικάπ και βιβλίο τέχνης για παιδιά πάνω σε ξύλινο τραπεζάκι, δίπλα σε φυτά, στον χώρο των Διαδρομών">
+      </picture><div class="sp-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div></div>
+      <div class="sp sp-5 rv-scale" data-d="3"><picture>
+        <source type="image/webp" sizes="(max-width:820px) calc(100vw - 56px), (max-width:1024px) calc((100vw - 76px)/2), 381px"
+          srcset="assets/play-therapy-art-materials-diadromes-thessaloniki-500.webp 500w, assets/play-therapy-art-materials-diadromes-thessaloniki-850.webp 850w, assets/play-therapy-art-materials-diadromes-thessaloniki.webp 1200w">
+        <img class="zoomable" src="assets/play-therapy-art-materials-diadromes-thessaloniki.jpg"
+          sizes="(max-width:820px) calc(100vw - 56px), (max-width:1024px) calc((100vw - 76px)/2), 381px"
+          srcset="assets/play-therapy-art-materials-diadromes-thessaloniki-500.jpg 500w, assets/play-therapy-art-materials-diadromes-thessaloniki-850.jpg 850w, assets/play-therapy-art-materials-diadromes-thessaloniki.jpg 1200w"
+          width="1200" height="1020" loading="lazy" decoding="async"
+          alt="Υλικά δημιουργικής απασχόλησης στο playroom των Διαδρομών: πινέλα σε κούπα και διάφανα κουτάκια με χάντρες, πομ πον και υλικά χειροτεχνίας">
+      </picture><div class="sp-zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div></div>
     </div>
   </div>
 </section>
@@ -955,7 +1056,7 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
 </footer>
 
 <!-- Lightbox -->
-<div class="lightbox" id="lightbox">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Προβολή φωτογραφίας" aria-hidden="true">
   <button class="lb-close" id="lbClose" aria-label="Κλείσιμο">
     <svg viewBox="0 0 24 24"><path d="M5 5 L19 19 M19 5 L5 19"/></svg>
   </button>
@@ -971,37 +1072,6 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
    ============================================================ */
 (function(){
 'use strict';
-
-/* ---------- Placeholder image generator ----------
-   Οι φωτογραφίες (χώρος & θεραπεύτριες) θα προστεθούν αργότερα.
-   ΑΝΤΙΚΑΤΑΣΤΑΣΗ: βάλε το πραγματικό URL στο src του <img>
-   και σβήσε το attribute data-ph — τίποτα άλλο δεν αλλάζει.  */
-const HUES = {
-  a:['#e9cfb6','#cf8a58','#b5673a'],
-  b:['#efdcc9','#d99a6c','#96522c'],
-  c:['#e5d3c6','#c98a63','#7d452a']
-};
-function ph(type, hue, init){
-  const [c1,c2,c3] = HUES[hue] || HUES.a;
-  const label = type === 'portrait'
-    ? '<circle cx="300" cy="270" r="118" fill="rgba(255,253,250,.55)"/><text x="300" y="312" font-family="Georgia,serif" font-size="120" fill="'+c3+'" text-anchor="middle" font-style="italic">'+(init||'Δ')+'</text><text x="300" y="560" font-family="Georgia,serif" font-size="26" fill="rgba(46,49,64,.55)" text-anchor="middle" font-style="italic">φωτογραφία σύντομα</text>'
-    : '<text x="300" y="330" font-family="Georgia,serif" font-size="28" fill="rgba(46,49,64,.55)" text-anchor="middle" font-style="italic">φωτογραφία του χώρου σύντομα</text>';
-  const h = type === 'portrait' ? 690 : 450;
-  const svg =
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 '+h+'">'+
-    '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">'+
-    '<stop offset="0" stop-color="'+c1+'"/><stop offset="1" stop-color="'+c2+'"/></linearGradient></defs>'+
-    '<rect width="600" height="'+h+'" fill="url(#g)"/>'+
-    '<path d="M-40 '+(h*0.82)+' C 120 '+(h*0.5)+', 220 '+(h*1.02)+', 360 '+(h*0.66)+' S 560 '+(h*0.3)+', 680 '+(h*0.44)+'" fill="none" stroke="rgba(255,253,250,.65)" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 26"/>'+
-    '<circle cx="520" cy="'+(h*0.22)+'" r="60" fill="rgba(255,253,250,.22)"/>'+
-    '<circle cx="90" cy="'+(h*0.9)+'" r="90" fill="rgba(46,49,64,.08)"/>'+
-    label + '</svg>';
-  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-}
-document.querySelectorAll('img[data-ph]').forEach(img => {
-  if (img.getAttribute('src')) return; // real photo already set — skip
-  img.src = ph(img.dataset.ph, img.dataset.hue, img.dataset.init);
-});
 
 /* ---------- Preloader ---------- */
 window.addEventListener('load', () => {
@@ -1127,17 +1197,53 @@ document.querySelectorAll('[data-more]').forEach(btn => {
 /* ---------- Lightbox ---------- */
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lbImg');
+const lbClose = document.getElementById('lbClose');
+let lbReturnFocus = null;
+
+/* the zoomable images open a dialog, so expose them as real keyboard controls */
+document.querySelectorAll('.zoomable').forEach(img => {
+  img.tabIndex = 0;
+  img.setAttribute('role', 'button');
+});
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const img = e.target.closest && e.target.closest('.zoomable');
+  if (!img) return;
+  e.preventDefault();
+  img.click();
+});
+
 document.addEventListener('click', e => {
   const img = e.target.closest('.zoomable');
   if (!img) return;
-  lbImg.src = img.currentSrc || img.src;
+  /* prefer the full-size src over the responsive candidate the browser picked,
+     so the lightbox never blows up a small srcset variant */
+  lbImg.src = img.getAttribute('src') || img.currentSrc;
   lbImg.alt = img.alt || '';
   lb.classList.add('open');
+  lb.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  lbReturnFocus = img;
+  /* the lightbox is visibility:hidden until .open paints — focus only lands after that */
+  setTimeout(() => lbClose.focus(), 60);
 });
-function closeLB(){ lb.classList.remove('open'); document.body.style.overflow = ''; }
-document.getElementById('lbClose').addEventListener('click', closeLB);
+function closeLB(){
+  lb.classList.remove('open');
+  lb.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (lbReturnFocus && lbReturnFocus.focus) lbReturnFocus.focus({preventScroll:true});
+  lbReturnFocus = null;
+}
+lbClose.addEventListener('click', closeLB);
 lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+/* focus trap — the close button is the only focusable node inside, so keep Tab on it.
+   Listens on document because focus may still be outside the dialog. */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Tab' && lb.classList.contains('open')){
+    e.preventDefault();
+    lbClose.focus();
+  }
+}, true);
 document.addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
   if (lb.classList.contains('open')) closeLB();
