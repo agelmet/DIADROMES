@@ -8,7 +8,7 @@
 <meta name="description" content="Οι Διαδρομές είναι ένας χώρος υποστήριξης & ψυχοθεραπείας. Ψυχοθεραπεία, συμβουλευτική γονέων και play therapy, με σεβασμό στην προσωπική διαδρομή του κάθε ατόμου.">
 <meta property="og:title" content="Διαδρομές — Χώρος Υποστήριξης & Ψυχοθεραπείας">
 <meta property="og:description" content="Ψυχοθεραπεία | Συμβουλευτική Γονέων | Play Therapy">
-<meta property="og:image" content="https://raw.githubusercontent.com/agelmet/DIADROMES/main/assets/diadromes-team-three-therapists-thessaloniki.jpg">
+<meta property="og:image" content="https://agelmet.github.io/DIADROMES/assets/diadromes-og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Οι τρεις θεραπεύτριες των Διαδρομών στον χώρο του play therapy">
@@ -16,9 +16,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Διαδρομές — Χώρος Υποστήριξης &amp; Ψυχοθεραπείας">
 <meta name="twitter:description" content="Ψυχοθεραπεία | Συμβουλευτική Γονέων | Play Therapy">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/agelmet/DIADROMES/main/assets/diadromes-team-three-therapists-thessaloniki.jpg">
+<meta name="twitter:image" content="https://agelmet.github.io/DIADROMES/assets/diadromes-og-cover.jpg">
 <meta name="twitter:image:alt" content="Οι τρεις θεραπεύτριες των Διαδρομών στον χώρο του play therapy">
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/agelmet/DIADROMES/main/logo%20(1).png">
+<link rel="icon" type="image/png" href="assets/diadromes-logo-180.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/diadromes-logo-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Commissioner:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -50,9 +51,13 @@
 *{margin:0;padding:0;box-sizing:border-box}
 /* <picture> wrappers must fill their frame so the inner img sizing rules still apply */
 .about-frame picture,.svc-img picture,.tcard-photo picture,.sp picture{display:block;width:100%;height:100%}
+/* logo <picture> wrappers must not become the sizing/positioning parent — display:contents
+   drops the wrapper from the box tree so .hero-logo's % width still resolves against the ring
+   and the absolutely-positioned decorative logos keep their original containing block */
+.logo-pic{display:contents}
 /* the width/height attrs (there to reserve space and stop CLS) are presentational hints —
    without this the attr height would beat the aspect-ratio rules below */
-.about-frame img,.svc-img img,.tcard-photo img{height:auto}
+.about-frame img,.svc-img img,.tcard-photo img,.hero-logo{height:auto}
 html{scroll-behavior:smooth}
 body{
   font-family:var(--font-b);
@@ -426,7 +431,10 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
 <nav id="nav">
   <div class="nav-inner">
     <a href="#top" class="nav-brand">
-      <img src="https://raw.githubusercontent.com/agelmet/DIADROMES/main/logo%20(1).png" alt="Διαδρομές λογότυπο">
+      <picture class="logo-pic">
+        <source type="image/webp" srcset="assets/diadromes-logo.webp">
+        <img src="assets/diadromes-logo.png" alt="Διαδρομές λογότυπο" width="500" height="500" decoding="async">
+      </picture>
       <span>Διαδρομές</span>
     </a>
     <ul class="nav-links">
@@ -470,7 +478,10 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
       <svg viewBox="0 0 36 36"><rect width="36" height="36" fill="#012169"/><path d="M0 0 L36 36 M36 0 L0 36" stroke="#fff" stroke-width="7"/><path d="M0 0 L36 36 M36 0 L0 36" stroke="#C8102E" stroke-width="3.4"/><path d="M18 0 V36 M0 18 H36" stroke="#fff" stroke-width="11"/><path d="M18 0 V36 M0 18 H36" stroke="#C8102E" stroke-width="6"/></svg>
     </button>
   </div>
-  <img class="mm-deco" src="https://raw.githubusercontent.com/agelmet/DIADROMES/main/logo%20(1).png" alt="">
+  <picture class="logo-pic">
+    <source type="image/webp" srcset="assets/diadromes-logo.webp">
+    <img class="mm-deco" src="assets/diadromes-logo.png" alt="" aria-hidden="true" decoding="async">
+  </picture>
 </div>
 
 <!-- ===================== HERO ===================== -->
@@ -518,7 +529,10 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
     </div>
     <div class="hero-visual">
       <div class="hero-logo-ring">
-        <img class="hero-logo zoomable" src="https://raw.githubusercontent.com/agelmet/DIADROMES/main/logo%20(1).png" alt="Διαδρομές — λογότυπο" width="500" height="500" fetchpriority="high" decoding="async">
+        <picture class="logo-pic">
+          <source type="image/webp" srcset="assets/diadromes-logo.webp">
+          <img class="hero-logo zoomable" src="assets/diadromes-logo.png" alt="Διαδρομές — λογότυπο" width="500" height="500" fetchpriority="high" decoding="async">
+        </picture>
         <div class="orbit-dot"></div>
       </div>
     </div>
@@ -1001,7 +1015,10 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
 <!-- ===================== CONTACT ===================== -->
 <section style="padding-bottom:0" id="contact">
   <div class="contact rv-scale">
-    <img class="contact-path" src="https://raw.githubusercontent.com/agelmet/DIADROMES/main/logo%20(1).png" alt="">
+    <picture class="logo-pic">
+      <source type="image/webp" srcset="assets/diadromes-logo.webp">
+      <img class="contact-path" src="assets/diadromes-logo.png" alt="" aria-hidden="true" decoding="async">
+    </picture>
     <div class="contact-grid">
       <div class="contact-copy">
         <div class="eyebrow"><span data-l="el">Επικοινωνία</span><span data-l="en">Contact</span></div>
@@ -1032,7 +1049,10 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="https://raw.githubusercontent.com/agelmet/DIADROMES/main/logo%20(1).png" alt="Διαδρομές">
+        <picture class="logo-pic">
+          <source type="image/webp" srcset="assets/diadromes-logo.webp">
+          <img src="assets/diadromes-logo.png" alt="Διαδρομές" width="500" height="500" loading="lazy" decoding="async">
+        </picture>
         <div>
           <b>Διαδρομές</b>
           <span data-l="el">ψυχοθεραπεία | συμβουλευτική γονέων | play therapy</span>
