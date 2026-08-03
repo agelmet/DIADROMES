@@ -18,8 +18,8 @@
 <meta name="twitter:description" content="Ψυχοθεραπεία | Συμβουλευτική Γονέων | Play Therapy">
 <meta name="twitter:image" content="https://agelmet.github.io/DIADROMES/assets/diadromes-og-cover.jpg">
 <meta name="twitter:image:alt" content="Οι τρεις θεραπεύτριες των Διαδρομών στον χώρο του play therapy">
-<link rel="icon" type="image/png" href="assets/diadromes-logo-180.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/diadromes-logo-180.png">
+<link rel="icon" type="image/png" href="assets/diadromes-concentric-circles-emblem-180.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/diadromes-apple-touch-icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Commissioner:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -101,7 +101,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 0;transition:a
 nav.scrolled{background:rgba(250,246,240,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:12px 0;box-shadow:0 6px 30px -12px rgba(46,49,64,.14)}
 .nav-inner{max-width:1240px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .nav-brand{display:flex;align-items:center;gap:12px}
-.nav-brand img{width:46px;height:46px;border-radius:50%;background:var(--white);box-shadow:0 4px 16px -6px rgba(181,103,58,.4);transition:transform .5s var(--ease-spring)}
+/* transparent emblem — no white plate behind it, and drop-shadow rather than box-shadow so
+   the glow follows the disc's alpha instead of drawing a square behind it (as in the hero) */
+.nav-brand img{width:46px;height:46px;filter:drop-shadow(0 4px 12px rgba(181,103,58,.38));transition:transform .5s var(--ease-spring)}
 .nav-brand:hover img{transform:rotate(-12deg) scale(1.08)}
 .nav-brand span{font-family:var(--font-d);font-weight:600;font-size:1.28rem;letter-spacing:.22em;text-transform:uppercase}
 .nav-links{display:flex;align-items:center;gap:30px;list-style:none}
@@ -190,11 +192,13 @@ nav.scrolled{background:rgba(250,246,240,.86);backdrop-filter:blur(16px);-webkit
 
 /* ---------- Marquee ---------- */
 .marquee{background:var(--ink);color:var(--paper);padding:20px 0;overflow:hidden;position:relative;transform:rotate(-1.2deg) scale(1.02);margin:10px 0 -10px}
-.marquee-track{display:flex;gap:0;width:max-content;animation:marquee 30s linear infinite}
+.marquee-track{display:flex;gap:0;width:max-content;animation:marquee var(--marquee-dur,30s) linear infinite}
 .marquee:hover .marquee-track{animation-play-state:paused}
 .marquee-track span{font-family:var(--font-d);font-size:1.28rem;font-style:italic;white-space:nowrap;padding:0 26px;display:flex;align-items:center;gap:52px}
 .marquee-track span::after{content:'✳';color:var(--clay);font-style:normal;font-size:1rem}
-@keyframes marquee{to{transform:translateX(-50%)}}
+/* shift by exactly one measured copy, not a fixed -50%: with only two copies a viewport wider
+   than one copy runs off the end of the track and the bar goes empty. JS sets both vars. */
+@keyframes marquee{to{transform:translateX(calc(-1 * var(--marquee-shift,50%)))}}
 
 /* ---------- Shared section styles ---------- */
 section{padding:110px 0;position:relative}
@@ -437,8 +441,9 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
   <div class="nav-inner">
     <a href="#top" class="nav-brand">
       <picture class="logo-pic">
-        <source type="image/webp" srcset="assets/diadromes-logo.webp">
-        <img src="assets/diadromes-logo.png" data-alt-el="Διαδρομές λογότυπο" data-alt-en="Diadromes logo" alt="Διαδρομές λογότυπο" width="500" height="500" decoding="async">
+        <source type="image/webp" sizes="46px" srcset="assets/diadromes-concentric-circles-emblem-254.webp 254w, assets/diadromes-concentric-circles-emblem-380.webp 380w, assets/diadromes-concentric-circles-emblem-507.webp 507w">
+        <img src="assets/diadromes-concentric-circles-emblem.png" sizes="46px" srcset="assets/diadromes-concentric-circles-emblem-254.png 254w, assets/diadromes-concentric-circles-emblem-380.png 380w, assets/diadromes-concentric-circles-emblem-507.png 507w"
+          data-alt-el="Διαδρομές λογότυπο" data-alt-en="Diadromes logo" alt="Διαδρομές λογότυπο" width="507" height="508" decoding="async">
       </picture>
       <span><span data-l="el">Διαδρομές</span><span data-l="en">Diadromes</span></span>
     </a>
@@ -484,8 +489,9 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
     </button>
   </div>
   <picture class="logo-pic">
-    <source type="image/webp" srcset="assets/diadromes-logo.webp">
-    <img class="mm-deco" src="assets/diadromes-logo.png" alt="" aria-hidden="true" decoding="async">
+    <source type="image/webp" sizes="300px" srcset="assets/diadromes-concentric-circles-emblem-254.webp 254w, assets/diadromes-concentric-circles-emblem-380.webp 380w, assets/diadromes-concentric-circles-emblem-507.webp 507w">
+    <img class="mm-deco" src="assets/diadromes-concentric-circles-emblem.png" sizes="300px" srcset="assets/diadromes-concentric-circles-emblem-254.png 254w, assets/diadromes-concentric-circles-emblem-380.png 380w, assets/diadromes-concentric-circles-emblem-507.png 507w"
+      alt="" aria-hidden="true" decoding="async">
   </picture>
 </div>
 
@@ -1056,8 +1062,9 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
 <section style="padding-bottom:0" id="contact">
   <div class="contact rv-scale">
     <picture class="logo-pic">
-      <source type="image/webp" srcset="assets/diadromes-logo.webp">
-      <img class="contact-path" src="assets/diadromes-logo.png" alt="" aria-hidden="true" decoding="async">
+      <source type="image/webp" sizes="420px" srcset="assets/diadromes-concentric-circles-emblem-254.webp 254w, assets/diadromes-concentric-circles-emblem-380.webp 380w, assets/diadromes-concentric-circles-emblem-507.webp 507w">
+      <img class="contact-path" src="assets/diadromes-concentric-circles-emblem.png" sizes="420px" srcset="assets/diadromes-concentric-circles-emblem-254.png 254w, assets/diadromes-concentric-circles-emblem-380.png 380w, assets/diadromes-concentric-circles-emblem-507.png 507w"
+        alt="" aria-hidden="true" decoding="async">
     </picture>
     <div class="contact-grid">
       <div class="contact-copy">
@@ -1090,8 +1097,9 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
     <div class="footer-grid">
       <div class="footer-brand">
         <picture class="logo-pic">
-          <source type="image/webp" srcset="assets/diadromes-logo.webp">
-          <img src="assets/diadromes-logo.png" data-alt-el="Διαδρομές" data-alt-en="Diadromes" alt="Διαδρομές" width="500" height="500" loading="lazy" decoding="async">
+          <source type="image/webp" sizes="52px" srcset="assets/diadromes-concentric-circles-emblem-254.webp 254w, assets/diadromes-concentric-circles-emblem-380.webp 380w, assets/diadromes-concentric-circles-emblem-507.webp 507w">
+          <img src="assets/diadromes-concentric-circles-emblem.png" sizes="52px" srcset="assets/diadromes-concentric-circles-emblem-254.png 254w, assets/diadromes-concentric-circles-emblem-380.png 380w, assets/diadromes-concentric-circles-emblem-507.png 507w"
+            data-alt-el="Διαδρομές" data-alt-en="Diadromes" alt="Διαδρομές" width="507" height="508" loading="lazy" decoding="async">
         </picture>
         <div>
           <b><span data-l="el">Διαδρομές</span><span data-l="en">Diadromes</span></b>
@@ -1177,7 +1185,8 @@ function setLang(l){
   document.querySelectorAll('[data-alt-' + l + ']').forEach(e => e.setAttribute('alt', e.getAttribute('data-alt-' + l)));
   document.querySelectorAll('[data-aria-' + l + ']').forEach(e => e.setAttribute('aria-label', e.getAttribute('data-aria-' + l)));
   try { localStorage.setItem('diadromes-lang', l); } catch(e){}
-  requestAnimationFrame(updateRoad);
+  /* rAF so this still works on the initial call, before the marquee consts below exist */
+  requestAnimationFrame(() => { updateRoad(); buildMarquee(); });
 }
 langBtns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 let savedLang = 'el';
@@ -1339,9 +1348,48 @@ document.addEventListener('keydown', e => {
   else if (mm.classList.contains('open')) closeMM();
 });
 
-/* ---------- Marquee: duplicate track for seamless loop ---------- */
+/* ---------- Marquee: enough copies that the bar is never empty ----------
+   One copy of the strip is ~1300px. The old code duplicated it once and slid the track
+   -50%, so on any viewport wider than a single copy the loop point exposed bare bar.
+   Instead: measure one copy, lay down as many as it takes to cover the viewport plus a
+   full copy, then slide by exactly one copy — seamless at any width. The visible strip
+   changes width with the language, so this reruns on language change and on resize. */
 const track = document.getElementById('marqueeTrack');
-track.innerHTML += track.innerHTML;
+const MARQUEE_SET = track.innerHTML;
+const MARQUEE_SPEED = 44; /* px per second, so the pace stays constant at any width */
+let marqueeKey = '';
+
+/* measure one copy on a hidden probe rather than on the live track — measuring in place
+   left the track holding a single copy whenever a rebuild was skipped */
+function measureMarqueeSet(){
+  const probe = document.createElement('div');
+  probe.className = 'marquee-track';
+  probe.innerHTML = MARQUEE_SET;
+  probe.style.cssText = 'position:absolute;top:0;left:0;visibility:hidden;pointer-events:none;animation:none;width:max-content';
+  track.parentElement.appendChild(probe);
+  const w = probe.scrollWidth;
+  probe.remove();
+  return w;
+}
+
+function buildMarquee(){
+  const setW = measureMarqueeSet();
+  if (!setW) return;
+  /* the bar is rotated and scaled up, so it paints wider than the viewport */
+  const need = Math.max(window.innerWidth, track.parentElement.getBoundingClientRect().width) * 1.25;
+  const copies = Math.max(2, Math.ceil((need + setW) / setW));
+  const key = copies + '@' + setW;
+  if (key !== marqueeKey){
+    track.innerHTML = MARQUEE_SET.repeat(copies);
+    track.style.setProperty('--marquee-shift', setW + 'px');
+    track.style.setProperty('--marquee-dur', (setW / MARQUEE_SPEED) + 's');
+    marqueeKey = key;
+  }
+}
+buildMarquee();
+/* the strip is set in a webfont — measuring before it lands gives the fallback's width */
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(buildMarquee);
+addEventListener('resize', () => { clearTimeout(window.__mqT); window.__mqT = setTimeout(buildMarquee, 150); });
 
 /* ---------- Year ---------- */
 document.getElementById('year').textContent = new Date().getFullYear();
