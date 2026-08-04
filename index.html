@@ -20,6 +20,32 @@
 <meta name="twitter:image:alt" content="Οι τρεις θεραπεύτριες των Διαδρομών στον χώρο του play therapy">
 <link rel="icon" type="image/png" href="assets/diadromes-concentric-circles-emblem-180.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/diadromes-apple-touch-icon-180.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "name": "Διαδρομές — Χώρος Υποστήριξης & Ψυχοθεραπείας",
+  "url": "https://agelmet.github.io/DIADROMES/",
+  "image": "https://agelmet.github.io/DIADROMES/assets/diadromes-og-cover.jpg",
+  "telephone": "+302311540039",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Γραβιάς 28",
+    "addressLocality": "Θεσσαλονίκη",
+    "postalCode": "546 45",
+    "addressCountry": "GR"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 40.6009823, "longitude": 22.9539598 },
+  "hasMap": "https://maps.app.goo.gl/S9oHdZKRQXp7BrbC8",
+  "sameAs": ["https://www.facebook.com/profile.php?id=61592884707896"],
+  "medicalSpecialty": "Psychiatric",
+  "availableService": [
+    { "@type": "MedicalTherapy", "name": "Ψυχοθεραπεία" },
+    { "@type": "MedicalTherapy", "name": "Συμβουλευτική Γονέων" },
+    { "@type": "MedicalTherapy", "name": "Play Therapy" }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Commissioner:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -59,6 +85,9 @@
    without this the attr height would beat the aspect-ratio rules below */
 .about-frame img,.svc-img img,.tcard-photo img,.hero-logo{height:auto}
 html{scroll-behavior:smooth}
+/* the tilted marquee and the decorative blobs bleed past the viewport on purpose;
+   clip (not hidden) kills the stray horizontal scrollbar without breaking position:sticky */
+html,body{overflow-x:clip}
 body{
   font-family:var(--font-b);
   background:var(--paper);
@@ -103,9 +132,13 @@ nav.scrolled{background:rgba(250,246,240,.86);backdrop-filter:blur(16px);-webkit
 .nav-brand{display:flex;align-items:center;gap:12px}
 /* transparent emblem — no white plate behind it, and drop-shadow rather than box-shadow so
    the glow follows the disc's alpha instead of drawing a square behind it (as in the hero) */
-.nav-brand img{width:46px;height:46px;filter:drop-shadow(0 4px 12px rgba(181,103,58,.38));transition:transform .5s var(--ease-spring)}
-.nav-brand:hover img{transform:rotate(-12deg) scale(1.08)}
+/* scoped to the emblem <picture> so the wordmark img beside it keeps its own sizing */
+.nav-brand .logo-pic img{width:46px;height:46px;filter:drop-shadow(0 4px 12px rgba(181,103,58,.38));transition:transform .5s var(--ease-spring)}
+.nav-brand:hover .logo-pic img{transform:rotate(-12deg) scale(1.08)}
 .nav-brand span{font-family:var(--font-d);font-weight:600;font-size:1.28rem;letter-spacing:.22em;text-transform:uppercase}
+/* the sent wordmark, traced to SVG — width drives the box, height follows the 1000:228 ratio */
+.brand-wordmark{width:148px;height:auto;flex:0 0 auto;transition:opacity .4s var(--ease)}
+.nav-brand:hover .brand-wordmark{opacity:.78}
 .nav-links{display:flex;align-items:center;gap:30px;list-style:none}
 .nav-links a{font-size:.86rem;font-weight:500;letter-spacing:.06em;position:relative;padding:4px 0;transition:color .3s}
 .nav-links a::after{content:'';position:absolute;left:0;bottom:-2px;width:100%;height:2px;background:var(--terra);border-radius:2px;transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
@@ -234,8 +267,10 @@ h2 em{font-style:italic;color:var(--terra)}
 .about-badge{position:absolute;bottom:-26px;left:-26px;background:var(--ink);color:var(--paper);border-radius:24px;padding:22px 28px;box-shadow:var(--shadow-soft);max-width:250px}
 .about-badge b{font-family:var(--font-d);font-size:1.5rem;font-weight:500;display:block;margin-bottom:2px;color:var(--clay-light)}
 .about-badge span{font-size:.82rem;opacity:.85;line-height:1.5;display:block}
-.about-rot{position:absolute;top:-34px;right:-34px;width:110px;height:110px;animation:spin 26s linear infinite;z-index:3}
-.about-rot text{font-size:10.5px;letter-spacing:2.5px;fill:var(--terra);text-transform:uppercase;font-family:var(--font-b);font-weight:600}
+/* the badge is scaled up and the type scaled down in user units, so the longer caption
+   fits one full turn of the circle while rendering at the same optical size as before */
+.about-rot{position:absolute;top:-40px;right:-40px;width:128px;height:128px;animation:spin 26s linear infinite;z-index:3}
+.about-rot text{font-size:8.2px;letter-spacing:.5px;fill:var(--terra);text-transform:uppercase;font-family:var(--font-b);font-weight:600}
 
 /* ---------- Services ---------- */
 .services{background:linear-gradient(180deg,var(--paper),var(--sand) 22%,var(--sand) 78%,var(--paper))}
@@ -246,8 +281,9 @@ h2 em{font-style:italic;color:var(--terra)}
 .svc{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;padding:56px 0}
 .svc + .svc{border-top:1.5px dashed rgba(181,103,58,.3)}
 .svc:nth-child(even) .svc-visual{order:2}
-.svc-num{font-family:var(--font-d);font-style:italic;font-size:1.05rem;color:var(--terra);display:inline-flex;align-items:center;gap:12px;margin-bottom:14px}
-.svc-num::after{content:'';width:44px;height:1.5px;background:var(--clay)}
+/* the labels are full phrases now, so the rule is pinned to the first line and never wraps */
+.svc-num{font-family:var(--font-d);font-style:italic;font-size:1rem;line-height:1.45;color:var(--terra);display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.svc-num::after{content:'';flex:0 0 44px;align-self:center;height:1.5px;background:var(--clay)}
 .svc h3{font-family:var(--font-d);font-weight:500;font-size:clamp(1.9rem,3.2vw,2.6rem);margin-bottom:18px;line-height:1.15}
 .svc p{color:var(--ink-soft);margin-bottom:15px;font-size:1.02rem}
 .svc ul{list-style:none;margin:8px 0 16px;display:grid;gap:9px}
@@ -337,6 +373,8 @@ h2 em{font-style:italic;color:var(--terra)}
 .faq-item.open .faq-icon svg{stroke:var(--white);transform:rotate(135deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .55s var(--ease)}
 .faq-a-inner{padding:0 28px 26px;color:var(--ink-soft);font-size:.97rem}
+.faq-a-inner a{color:var(--terra);font-weight:600;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.faq-a-inner a:hover{color:var(--ink)}
 
 /* ---------- Contact ---------- */
 .contact{background:linear-gradient(160deg,var(--ink),#3a3e52);color:var(--paper);border-radius:56px;max-width:1240px;margin:0 auto 110px;padding:90px 60px;position:relative;overflow:hidden}
@@ -354,12 +392,29 @@ h2 em{font-style:italic;color:var(--terra)}
 .ccard span{font-size:.85rem;color:rgba(250,246,240,.68)}
 .contact-path{position:absolute;right:-60px;bottom:-60px;width:420px;opacity:.1;pointer-events:none;animation:spin 60s linear infinite}
 
+/* ---------- Visit / address + map (lives inside the dark contact card) ---------- */
+.visit{position:relative;z-index:2;margin-top:56px;padding-top:52px;border-top:1px solid rgba(250,246,240,.16);display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center}
+.visit-copy h3{font-family:var(--font-d);font-size:1.85rem;font-weight:500;line-height:1.25;margin:6px 0 12px}
+.visit-line{color:rgba(250,246,240,.72);font-size:.98rem;margin-bottom:26px;max-width:380px}
+.visit .btn-ghost{border-color:rgba(250,246,240,.42);color:var(--paper)}
+.visit .btn-ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+/* the pin should settle, not slide off, so the shared btn svg nudge is overridden */
+.visit .btn:hover svg{transform:translateY(-2px)}
+/* opaque backdrop so the spinning emblem behind never shows through a slow-loading map */
+.visit-map{border-radius:26px;overflow:hidden;border:1px solid rgba(250,246,240,.18);background:#2a2d3b;box-shadow:0 22px 50px rgba(20,22,30,.35);line-height:0}
+.visit-map iframe{width:100%;height:320px;border:0;display:block;filter:saturate(.88)}
+
 /* ---------- Footer ---------- */
 footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--line)}
 .footer-grid{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:26px;margin-bottom:36px}
 .footer-brand{display:flex;align-items:center;gap:14px}
-.footer-brand img{width:52px;height:52px;border-radius:50%}
+/* scoped to the emblem <picture> so the wordmark img beside it keeps its own sizing */
+.footer-brand .logo-pic img{width:52px;height:52px;border-radius:50%}
 .footer-brand b{font-family:var(--font-d);font-size:1.25rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;display:block}
+.footer-wordmark{width:156px;display:block;margin-bottom:7px}
+.footer-addr{display:block;margin-top:5px}
+.footer-addr a{color:var(--ink-soft);white-space:nowrap;border-bottom:1px solid var(--line);transition:color .3s,border-color .3s}
+.footer-addr a:hover{color:var(--terra);border-color:var(--terra)}
 .footer-brand span{font-size:.8rem;color:var(--ink-soft)}
 .footer-links{display:flex;flex-wrap:wrap;gap:24px;list-style:none}
 .footer-links a{font-size:.88rem;font-weight:500;color:var(--ink-soft);transition:color .3s}
@@ -391,6 +446,11 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
   .hero-visual{order:-1}
   .hero-logo-ring{width:min(300px,70vw)}
   .about-grid,.svc,.contact-grid,.faq-grid{grid-template-columns:1fr;gap:48px}
+  .visit{grid-template-columns:1fr;gap:34px}
+  .visit-map iframe{height:280px}
+  /* the brand block is tall once the address is in, so the emblem tracks the first line */
+  .footer-brand{align-items:flex-start}
+  .footer-brand .logo-pic img{margin-top:4px}
   .svc:nth-child(even) .svc-visual{order:0}
   .team-grid{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto}
   .faq-side{position:static}
@@ -409,11 +469,17 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
   section{padding:80px 0}
   .contact{border-radius:36px;padding:64px 30px;margin:0 16px 80px}
   .about-badge{left:12px;bottom:-22px;padding:18px 22px}
-  .about-rot{top:-24px;right:-10px;width:90px;height:90px}
+  .about-rot{top:-28px;right:-8px;width:106px;height:106px}
   .marquee-track span{font-size:1.05rem}
   .space-grid{grid-template-columns:1fr}
   .hero{padding-top:110px}
   .svc-doodle{right:6px;width:92px}
+}
+@media(max-width:480px){
+  /* emblem + wordmark + burger must still fit a 390px bar without wrapping */
+  .nav-brand{gap:9px}
+  .nav-brand .logo-pic img{width:38px;height:38px}
+  .brand-wordmark{width:118px}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
@@ -445,7 +511,8 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
         <img src="assets/diadromes-concentric-circles-emblem.png" sizes="46px" srcset="assets/diadromes-concentric-circles-emblem-254.png 254w, assets/diadromes-concentric-circles-emblem-380.png 380w, assets/diadromes-concentric-circles-emblem-507.png 507w"
           data-alt-el="Διαδρομές λογότυπο" data-alt-en="Diadromes logo" alt="Διαδρομές λογότυπο" width="507" height="508" decoding="async">
       </picture>
-      <span><span data-l="el">Διαδρομές</span><span data-l="en">Diadromes</span></span>
+      <img class="brand-wordmark" src="assets/diadromes-wordmark.svg"
+        data-alt-el="Διαδρομές" data-alt-en="Diadromes" alt="Διαδρομές" width="1000" height="228" decoding="async">
     </a>
     <ul class="nav-links">
       <li><a href="#about"><span data-l="el">Ποιες είμαστε</span><span data-l="en">About</span></a></li>
@@ -550,6 +617,7 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
             data-alt-el="Το έμβλημα των Διαδρομών: ομόκεντροι κύκλοι σχεδιασμένοι στο χέρι σε χρώμα τερακότα"
             data-alt-en="The Diadromes emblem: hand-drawn concentric circles in terracotta"
             alt="Το έμβλημα των Διαδρομών: ομόκεντροι κύκλοι σχεδιασμένοι στο χέρι σε χρώμα τερακότα">
+        </picture>
         <div class="orbit-dot"></div>
       </div>
     </div>
@@ -589,7 +657,7 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
       <div class="about-visual rv-right">
         <svg class="about-rot" viewBox="0 0 100 100">
           <defs><path id="circlePath" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
-          <text><textPath href="#circlePath"><tspan data-l="el">διαδρομές · ασφαλής χώρος · </tspan><tspan data-l="en">diadromes · safe space · here </tspan></textPath></text>
+          <text><textPath href="#circlePath"><tspan data-l="el">χώρος υποστήριξης και ψυχοθεραπείας · </tspan><tspan data-l="en">a space of support and psychotherapy · </tspan></textPath></text>
         </svg>
         <div class="about-frame">
           <picture>
@@ -619,17 +687,17 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
   <div class="container">
     <div class="svc-head rv">
       <div class="eyebrow"><span data-l="el">Οι υπηρεσίες μας</span><span data-l="en">Our services</span></div>
-      <h2><span data-l="el">Ένας ασφαλής χώρος για να <em>εκφραστείτε</em>, να κατανοηθείτε, να εξελιχθείτε.</span><span data-l="en">A safe space to <em>express</em> yourself, feel understood, and grow.</span></h2>
+      <h2><span data-l="el">Ένας ασφαλής χώρος για <em>έκφραση</em>, αποδοχή και εξέλιξη.</span><span data-l="en">A safe space for <em>expression</em>, acceptance and growth.</span></h2>
       <p class="section-lede">
-        <span data-l="el">Σε έναν κόσμο που αλλάζει διαρκώς, κάθε άτομο, κάθε οικογένεια και κάθε παιδί χρειάζεται έναν ασφαλή χώρο για να εκφραστεί, να κατανοηθεί και να εξελιχθεί. Η θεραπευτική διαδικασία δεν είναι απλώς η επίλυση δυσκολιών, αλλά ένα ταξίδι ανακάλυψης των εσωτερικών μας δυνάμεων. Μέσα από την Ψυχοθεραπεία, τη Συμβουλευτική Γονέων και το Play Therapy, προσφέρουμε εξειδικευμένη υποστήριξη προσαρμοσμένη στις δικές σας ανάγκες.</span>
-        <span data-l="en">In a constantly changing world, every person, family and child needs a safe space to express themselves, feel understood and grow. Therapy is not simply about solving difficulties — it is a journey of discovering our inner strengths. Through Psychotherapy, Parent Counselling and Play Therapy, we offer specialised support tailored to your needs.</span>
+        <span data-l="el">Σε έναν κόσμο που αλλάζει διαρκώς, κάθε άτομο, κάθε οικογένεια και κάθε παιδί χρειάζεται έναν ασφαλή χώρο για να εκφραστεί, να βιώσει αποδοχή και να εξελιχθεί.</span>
+        <span data-l="en">In a constantly changing world, every person, every family and every child needs a safe space to express themselves, experience acceptance and grow.</span>
       </p>
     </div>
 
     <!-- Service 1: Ψυχοθεραπεία -->
     <div class="svc rv" id="svc-psy">
       <div class="svc-copy">
-        <div class="svc-num"><span data-l="el">Πρώτη στάση</span><span data-l="en">First stop</span></div>
+        <div class="svc-num"><span data-l="el">Διαδρομή προς την ψυχοθεραπεία</span><span data-l="en">A path towards psychotherapy</span></div>
         <h3><span data-l="el">Ψυχοθεραπεία</span><span data-l="en">Psychotherapy</span></h3>
         <div data-l="el">
           <p>Η ψυχοθεραπεία είναι ένας χώρος συνάντησης. Ένας χώρος όπου μπορεί κανείς να μιλήσει ανοιχτά, χωρίς φόβο, χωρίς κριτική, και να ανακαλύψει τον εαυτό του με τρόπο αληθινό. Δεν πρόκειται για συμβουλές ή έτοιμες λύσεις, αλλά για μια πορεία κατανόησης και αλλαγής που συμβαδίζει με τον ρυθμό και τις ανάγκες του κάθε ανθρώπου.</p>
@@ -661,7 +729,7 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
     <!-- Service 2: Συμβουλευτική Γονέων -->
     <div class="svc rv" id="svc-parents">
       <div class="svc-copy">
-        <div class="svc-num"><span data-l="el">Δεύτερη στάση</span><span data-l="en">Second stop</span></div>
+        <div class="svc-num"><span data-l="el">Διαδρομή προς τη συμβουλευτική γονέων</span><span data-l="en">A path towards parent counselling</span></div>
         <h3><span data-l="el">Συμβουλευτική Γονέων</span><span data-l="en">Parent Counselling</span></h3>
         <div data-l="el">
           <p>Η συμβουλευτική γονέων είναι μια διαδικασία μέσα από την οποία ο γονιός εμπλουτίζει τα εργαλεία του για να αντιμετωπίσει τις προκλήσεις και τους προβληματισμούς που σχετίζονται με το μεγάλωμα του παιδιού, τη μεταξύ τους σχέση και τη λειτουργία της οικογένειας. Είναι ένας χώρος ενδυνάμωσης, υποστήριξης και κατανόησης, όπου η σύμβουλος στέκεται δίπλα στον γονιό με σεβασμό και χωρίς κριτική.</p>
@@ -711,7 +779,7 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
     <!-- Service 3: Play Therapy -->
     <div class="svc rv" id="svc-play">
       <div class="svc-copy">
-        <div class="svc-num"><span data-l="el">Τρίτη στάση</span><span data-l="en">Third stop</span></div>
+        <div class="svc-num"><span data-l="el">Διαδρομή προς το play therapy</span><span data-l="en">A path towards play therapy</span></div>
         <h3>Play Therapy</h3>
         <div data-l="el">
           <p>To play therapy (παιγνιοθεραπεία) είναι μια μορφή θεραπείας για παιδιά, που αξιοποιεί το παιχνίδι ως τον πιο φυσικό τρόπο με τον οποίο εκείνα εκφράζονται, πειραματίζονται και επεξεργάζονται, με τον δικό τους ρυθμό, όσα τους συμβαίνουν. Στον ασφαλή χώρο του playroom, το παιδί έχει στη διάθεσή του υλικά όπως σύμβολα, παιχνίδια ρόλων, άμμο και μινιατούρες, ζωγραφική, πηλό και πλαστελίνη, μουσικά όργανα κ.α. Μέσα από αυτά εκφράζει τις σκέψεις και τα συναισθήματά του, συχνά πριν ακόμη μπορέσει να τα βάλει σε λέξεις. Η παιγνιοθεραπεύτρια στέκεται δίπλα του με αποδοχή, σεβασμό και συνέπεια, χωρίς να κατευθύνει, βοηθώντας το να νιώσει ασφαλές να δείξει αυτό που κουβαλάει.</p>
@@ -861,6 +929,7 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
           </button>
           <div class="tcard-contact">
             <a class="tchip" href="tel:+306942982393"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.34 1.78.65 2.63a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.45-1.22a2 2 0 0 1 2.11-.45c.85.31 1.73.53 2.63.65A2 2 0 0 1 22 16.92z"/></svg>6942 982393</a>
+            <a class="tchip" href="https://www.facebook.com/profile.php?id=61592884707896" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Facebook</a>
           </div>
         </div>
       </div>
@@ -1034,12 +1103,12 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
           <div class="faq-a"><div class="faq-a-inner"><span data-l="el">Δεν χρειάζεται να το γνωρίζετε από πριν. Στην πρώτη επικοινωνία συζητάμε μαζί τι σας απασχολεί και σας κατευθύνουμε στην υπηρεσία — ψυχοθεραπεία, συμβουλευτική γονέων ή play therapy — που ανταποκρίνεται καλύτερα στις ανάγκες σας.</span><span data-l="en">You don't need to know in advance. In our first contact we discuss what concerns you and guide you to the service — psychotherapy, parent counselling or play therapy — that best fits your needs.</span></div></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span><span data-l="el">Πόσο διαρκεί μια συνεδρία και πόσο συχνά γίνεται;</span><span data-l="en">How long is a session and how often do we meet?</span></span><span class="faq-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14"/></svg></span></button>
-          <div class="faq-a"><div class="faq-a-inner"><span data-l="el">Μια συνεδρία διαρκεί συνήθως 50 λεπτά και πραγματοποιείται μία φορά την εβδομάδα, σε σταθερή ημέρα και ώρα. Η συχνότητα μπορεί να προσαρμοστεί ανάλογα με τις ανάγκες και τη φάση της θεραπευτικής πορείας.</span><span data-l="en">A session usually lasts 50 minutes and takes place once a week, at a fixed day and time. Frequency can be adjusted depending on your needs and the stage of the therapeutic process.</span></div></div>
+          <button class="faq-q"><span><span data-l="el">Πόσο συχνά γίνονται οι συνεδρίες;</span><span data-l="en">How often do the sessions take place?</span></span><span class="faq-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner"><span data-l="el">Οι συνεδρίες πραγματοποιούνται συνήθως σε σταθερή ημέρα και ώρα, ώστε να υπάρχει ένα σταθερό σημείο αναφοράς στην εβδομάδα. Η συχνότητα και το πλάνο των συναντήσεων μπορούν να προσαρμοστούν ανάλογα με τις ανάγκες σας και τη φάση της θεραπευτικής πορείας.</span><span data-l="en">Sessions usually take place on a fixed day and time, so there is a steady point of reference within the week. The frequency and the plan of our meetings can be adjusted according to your needs and the stage of the therapeutic process.</span></div></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q"><span><span data-l="el">Χρειάζεται να είμαι παρών/παρούσα στο play therapy του παιδιού μου;</span><span data-l="en">Do I need to be present during my child's play therapy?</span></span><span class="faq-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14"/></svg></span></button>
-          <div class="faq-a"><div class="faq-a-inner"><span data-l="el">Οι συνεδρίες play therapy γίνονται ατομικά, ώστε το παιδί να νιώσει το playroom ως δικό του, ασφαλή χώρο. Οι γονείς όμως είναι πολύτιμοι συνεργάτες: πραγματοποιούμε τακτικές συναντήσεις ενημέρωσης και συνεργασίας μαζί σας, ώστε να πορευόμαστε όλοι μαζί.</span><span data-l="en">Play therapy sessions are one-to-one, so the child can experience the playroom as their own safe space. Parents, however, are valued partners: we hold regular update and collaboration meetings with you so we can move forward together.</span></div></div>
+          <button class="faq-q"><span><span data-l="el">Χρειάζεται να είμαι παρών/παρούσα στις συνεδρίες του παιδιού μου;</span><span data-l="en">Do I need to be present during my child's sessions?</span></span><span class="faq-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14"/></svg></span></button>
+          <div class="faq-a"><div class="faq-a-inner"><span data-l="el">Οι συνεδρίες play therapy γίνονται ατομικά, ώστε το παιδί να νιώσει το playroom ως δικό του, ασφαλή χώρο. Κατά τη διάρκεια της συνεδρίας ο γονέας παραμένει στον χώρο αναμονής. Οι γονείς είναι πολύτιμοι συνεργάτες: πραγματοποιούμε τακτικές συναντήσεις ενημέρωσης και συνεργασίας μαζί σας, ώστε να πορευόμαστε όλοι μαζί.</span><span data-l="en">Play therapy sessions are one-to-one, so the child can experience the playroom as their own safe space. During the session the parent stays in the waiting area. Parents are valued partners: we hold regular update and collaboration meetings with you so we can move forward together.</span></div></div>
         </div>
         <div class="faq-item">
           <button class="faq-q"><span><span data-l="el">Όσα μοιράζομαι παραμένουν απόρρητα;</span><span data-l="en">Is everything I share confidential?</span></span><span class="faq-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14"/></svg></span></button>
@@ -1051,7 +1120,7 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
         </div>
         <div class="faq-item">
           <button class="faq-q"><span><span data-l="el">Πώς κλείνω το πρώτο μου ραντεβού;</span><span data-l="en">How do I book my first appointment?</span></span><span class="faq-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14"/></svg></span></button>
-          <div class="faq-a"><div class="faq-a-inner"><span data-l="el">Απλά τηλεφωνικά — καλέστε τη θεραπεύτρια της υπηρεσίας που σας ενδιαφέρει. Θα βρείτε τα τηλέφωνά μας στην ενότητα «Επικοινωνία». Αν δεν απαντήσουμε άμεσα, πιθανότατα βρισκόμαστε σε συνεδρία και θα σας καλέσουμε το συντομότερο.</span><span data-l="en">Simply by phone — call the therapist of the service you're interested in. You'll find our numbers in the Contact section. If we don't answer right away, we're likely in session and will call you back as soon as possible.</span></div></div>
+          <div class="faq-a"><div class="faq-a-inner"><span data-l="el">Απλά τηλεφωνικά. Μπορείτε να καλέσετε το τηλέφωνο του γραφείου, <a href="tel:+302311540039">2311 540039</a>, ή απευθείας τη θεραπεύτρια της υπηρεσίας που σας ενδιαφέρει — θα βρείτε τα τηλέφωνά μας στην ενότητα «Επικοινωνία». Αν δεν απαντήσουμε άμεσα, πιθανότατα βρισκόμαστε σε συνεδρία και θα σας καλέσουμε το συντομότερο.</span><span data-l="en">Simply by phone. You can call the practice on <a href="tel:+302311540039">2311 540039</a>, or reach the therapist of the service you're interested in directly — you'll find our numbers in the Contact section. If we don't answer right away, we're likely in session and will call you back as soon as possible.</span></div></div>
         </div>
       </div>
     </div>
@@ -1074,9 +1143,13 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
         <a href="tel:+306942982393" class="btn btn-primary"><span data-l="el">Καλέστε μας τώρα</span><span data-l="en">Call us now</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="contact-cards">
+        <a class="ccard ccard-main" href="tel:+302311540039">
+          <span class="ccard-ic"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.34 1.78.65 2.63a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.45-1.22a2 2 0 0 1 2.11-.45c.85.31 1.73.53 2.63.65A2 2 0 0 1 22 16.92z"/></svg></span>
+          <div><b><span data-l="el">Τηλέφωνο γραφείου</span><span data-l="en">Practice phone</span></b><span>2311 540039</span></div>
+        </a>
         <a class="ccard" href="tel:+306942982393">
           <span class="ccard-ic"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.34 1.78.65 2.63a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.45-1.22a2 2 0 0 1 2.11-.45c.85.31 1.73.53 2.63.65A2 2 0 0 1 22 16.92z"/></svg></span>
-          <div><b><span data-l="el">Ζωή Τριανταφυλλίδου</span><span data-l="en">Zoi Triantafyllidou</span> — <span data-l="el">Ψυχοθεραπεία</span><span data-l="en">Psychotherapy</span></b><span>6942 982393</span></div>
+          <div><b><span data-l="el">Ζωή Τριανταφυλλίδου</span><span data-l="en">Zoi Triantafyllidou</span> — <span data-l="el">Ψυχοθεραπεία</span><span data-l="en">Psychotherapy</span></b><span>6942 982393 · Facebook</span></div>
         </a>
         <a class="ccard" href="tel:+306947224892">
           <span class="ccard-ic"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.34 1.78.65 2.63a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.45-1.22a2 2 0 0 1 2.11-.45c.85.31 1.73.53 2.63.65A2 2 0 0 1 22 16.92z"/></svg></span>
@@ -1086,6 +1159,28 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
           <span class="ccard-ic"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.34 1.78.65 2.63a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.45-1.22a2 2 0 0 1 2.11-.45c.85.31 1.73.53 2.63.65A2 2 0 0 1 22 16.92z"/></svg></span>
           <div><b><span data-l="el">Μαριλένα Χαλαμανίδου</span><span data-l="en">Marilena Chalamanidou</span> — Play Therapy</b><span>6946 884642 · @playtherapy_skg</span></div>
         </a>
+      </div>
+    </div>
+
+    <div class="visit">
+      <div class="visit-copy">
+        <div class="eyebrow"><span data-l="el">Ο χώρος μας</span><span data-l="en">Find us</span></div>
+        <h3><span data-l="el">Γραβιάς 28, Θεσσαλονίκη</span><span data-l="en">28 Gravias St, Thessaloniki</span></h3>
+        <p class="visit-line">
+          <span data-l="el">Περιοχή Μαρτίου, πλησίον στάσης μετρό «Μαρτίου».</span>
+          <span data-l="en">Martiou district, a short walk from “Martiou” metro station.</span>
+        </p>
+        <a class="btn btn-ghost" href="https://maps.app.goo.gl/S9oHdZKRQXp7BrbC8" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 13-9 13s-9-7-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span data-l="el">Οδηγίες στον χάρτη</span><span data-l="en">Get directions</span>
+        </a>
+      </div>
+      <div class="visit-map">
+        <iframe
+          src="https://www.google.com/maps?q=%CE%93%CF%81%CE%B1%CE%B2%CE%B9%CE%AC%CF%82%2028%2C%20%CE%98%CE%B5%CF%83%CF%83%CE%B1%CE%BB%CE%BF%CE%BD%CE%AF%CE%BA%CE%B7%20546%2045&amp;ll=40.6009823,22.9539598&amp;z=17&amp;hl=el&amp;output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          data-title-el="Χάρτης — Γραβιάς 28, Θεσσαλονίκη" data-title-en="Map — 28 Gravias St, Thessaloniki"
+          title="Χάρτης — Γραβιάς 28, Θεσσαλονίκη"></iframe>
       </div>
     </div>
   </div>
@@ -1102,9 +1197,14 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
             data-alt-el="Διαδρομές" data-alt-en="Diadromes" alt="Διαδρομές" width="507" height="508" loading="lazy" decoding="async">
         </picture>
         <div>
-          <b><span data-l="el">Διαδρομές</span><span data-l="en">Diadromes</span></b>
+          <img class="brand-wordmark footer-wordmark" src="assets/diadromes-wordmark.svg"
+            data-alt-el="Διαδρομές" data-alt-en="Diadromes" alt="Διαδρομές" width="1000" height="228" loading="lazy" decoding="async">
           <span data-l="el">ψυχοθεραπεία | συμβουλευτική γονέων | play therapy</span>
           <span data-l="en">psychotherapy | parent counselling | play therapy</span>
+          <span class="footer-addr">
+            <a href="https://maps.app.goo.gl/S9oHdZKRQXp7BrbC8" target="_blank" rel="noopener"><span data-l="el">Γραβιάς 28, Θεσσαλονίκη</span><span data-l="en">28 Gravias St, Thessaloniki</span></a>
+            · <a href="tel:+302311540039">2311 540039</a>
+          </span>
         </div>
       </div>
       <ul class="footer-links">
@@ -1184,6 +1284,7 @@ function setLang(l){
   setMeta('meta[name="twitter:image:alt"]',  t.ogAlt);
   document.querySelectorAll('[data-alt-' + l + ']').forEach(e => e.setAttribute('alt', e.getAttribute('data-alt-' + l)));
   document.querySelectorAll('[data-aria-' + l + ']').forEach(e => e.setAttribute('aria-label', e.getAttribute('data-aria-' + l)));
+  document.querySelectorAll('[data-title-' + l + ']').forEach(e => e.setAttribute('title', e.getAttribute('data-title-' + l)));
   try { localStorage.setItem('diadromes-lang', l); } catch(e){}
   /* rAF so this still works on the initial call, before the marquee consts below exist */
   requestAnimationFrame(() => { updateRoad(); buildMarquee(); });
