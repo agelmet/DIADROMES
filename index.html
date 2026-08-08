@@ -85,20 +85,33 @@
    without this the attr height would beat the aspect-ratio rules below */
 .about-frame img,.svc-img img,.tcard-photo img,.hero-logo{height:auto}
 html{scroll-behavior:smooth}
-/* the tilted marquee and the decorative blobs bleed past the viewport on purpose;
-   clip (not hidden) kills the stray horizontal scrollbar without breaking position:sticky */
-html,body{overflow-x:clip}
+/* ---------- Horizontal containment ----------
+   Several things bleed past the viewport ON PURPOSE: the tilted marquee (rotate + scale),
+   the blurred hero blobs, the spinning emblems, and above all the slide-in reveals —
+   .rv-left/.rv-right start life at translateX(±54px) and only settle when scrolled into
+   view. That last one was the real bug: as you scrolled, elements slid in and the document
+   width changed under you (390 -> 443 -> 390), which is why the page drifted sideways.
+
+   The previous fix put overflow-x on <html>/<body>. That masks the problem instead of
+   containing it, and overflow-x:hidden on <body> turns the body into a scroll container
+   that position:sticky then anchors to. Instead each section clips its own bleed:
+   overflow-x:clip does NOT create a scroll container, so .faq-side's position:sticky and
+   the position:fixed nav / loader / lightbox / #toTop (all direct children of <body>,
+   outside these boxes) are untouched. Anything genuinely mis-sized still has to be fixed
+   on its own terms rather than hidden here. */
+header.hero,section,footer,.marquee-wrap{overflow-x:clip}
 body{
   font-family:var(--font-b);
   background:var(--paper);
   color:var(--ink);
   font-size:16px;
   line-height:1.7;
-  overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
 ::selection{background:var(--terra);color:var(--white)}
 img{max-width:100%;display:block}
+/* defensive: replaced/wide elements can never push the layout past its container */
+img,video,iframe,table{max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 ::-webkit-scrollbar{width:11px}
@@ -219,7 +232,7 @@ nav.scrolled{background:rgba(250,246,240,.86);backdrop-filter:blur(16px);-webkit
 .blob-1{width:480px;height:480px;background:rgba(207,138,88,.22);top:-140px;right:-120px;animation:float 11s ease-in-out infinite}
 .blob-2{width:380px;height:380px;background:rgba(240,221,204,.85);bottom:-100px;left:-140px;animation:float 13s ease-in-out infinite reverse}
 @keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(24px,-30px) scale(1.06)}}
-.scroll-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);opacity:0;animation:fadeUp 1s var(--ease) 2.6s forwards;z-index:3}
+.scroll-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;opacity:0;animation:fadeUp 1s var(--ease) 2.6s forwards;z-index:3}
 .scroll-hint::after{content:'';width:1.5px;height:44px;background:linear-gradient(var(--terra),transparent);animation:scrollPulse 1.8s ease-in-out infinite}
 @keyframes scrollPulse{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(.55);opacity:.4}}
 
@@ -622,10 +635,16 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
       </div>
     </div>
   </div>
-  <div class="scroll-hint"><span data-l="el">Κύλιση</span><span data-l="en">Scroll</span></div>
+  <!-- Scroll affordance: purely decorative animated line. The old «Κύλιση» / «Scroll» caption was
+       not labelling any scrollable region (the page has none), so it is removed rather than
+       visually hidden. aria-hidden keeps the bare line out of the accessibility tree. -->
+  <div class="scroll-hint" aria-hidden="true"></div>
 </header>
 
 <!-- ===================== MARQUEE ===================== -->
+<!-- .marquee is rotated and scaled up so it paints wider than the viewport by design;
+     the wrapper is what clips that bleed. -->
+<div class="marquee-wrap">
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track" id="marqueeTrack">
     <span data-l="el">ψυχοθεραπεία</span><span data-l="en">psychotherapy</span>
@@ -635,6 +654,7 @@ footer{background:var(--paper);padding:60px 0 34px;border-top:1.5px solid var(--
     <span data-l="el">σεβασμός στη διαδρομή σας</span><span data-l="en">respect for your path</span>
   </div>
 </div>
+</div><!-- /.marquee-wrap -->
 
 <!-- ===================== ABOUT ===================== -->
 <section class="about" id="about">
